@@ -1,2 +1,2 @@
 # typeprint
-A quick script to print text files as if it was being typed.
+A quick program to print text files as if it was being typed.
