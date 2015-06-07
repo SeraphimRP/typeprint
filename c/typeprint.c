@@ -2,20 +2,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static int process(char *name, struct timespec *ts);
+
 static int
 process(char *name, struct timespec *ts)
 {
         FILE *file = fopen(name, "r");
 
         if (file == 0){
-                fprintf(stderr, "[err] you either gave me an invalid file, or no file at all");
-                return -1;
+            fprintf(stderr, "[err] you either gave me an invalid file, or no file at all");
+            return -1;
         }
 
         int x;
         while ((x = fgetc(file)) != EOF) {
-                printf("%c", x);
-                nanosleep(ts, NULL);
+            printf("%c", x);
+            nanosleep(ts, NULL);
         }
 
         return 0;
