@@ -1,3 +1,6 @@
+/* vypr's typeprint */
+/* https://github.com/vypr/typeprint */
+
 #include <time.h>
 #include <errno.h>
 #include <stdio.h>
@@ -28,7 +31,10 @@ process(char *name)
         int x;
         while ((x = fgetc(file)) != EOF) {
             printf("%c", x);
+
+            /* flush stdout, because it won't look like typing without. */
             fflush(stdout);
+
             nanosleep(&ts, NULL);
         }
 
