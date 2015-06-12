@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static int process(char *name);
 
@@ -14,9 +15,14 @@ process(char *name)
         ts.tv_sec = 0;
         ts.tv_nsec = 10 * 1000000;
 
-        if (file == 0) {
+        if (access(file, F_OK) = -1) {
             fprintf(stderr, "[err] no such file or directory\n");
             return ENOENT;
+        }
+
+        if (access(file, R_OK) = -1) {
+            fprintf(stderr, "[err] can't read file, permission denied\n");
+            return EACCES;
         }
 
         int x;
