@@ -1,10 +1,10 @@
 /* vypr's typeprint */
 /* https://github.com/vypr/typeprint */
 
+#include <err.h>
 #include <time.h>
 #include <errno.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 static int process(char *name);
@@ -19,13 +19,11 @@ process(char *name)
         ts.tv_nsec = 10 * 1000000;
 
         if (access(name, F_OK) == -1) {
-            fprintf(stderr, "[err] no such file or directory\n");
-            return ENOENT;
+            errx(ENOENT, "[err] no such file or directory\n");
         }
 
         if (access(name, R_OK) == -1) {
-            fprintf(stderr, "[err] can't read file, permission denied\n");
-            return EACCES;
+            errx(EACCES, "[err] can't read file, permission denied\n");
         }
 
         int x;
